@@ -1,0 +1,20 @@
+name: Build and push test docker image
+
+on: [push]
+
+env:
+    DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+    DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+    REPOSITORY: ${{ github.repository }}
+
+jobs:
+  push-image-to-dockerhub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: docker build
+        run: docker build -t ${{ REPOSITORY }} .
+      - name: docker publish
+        run: docker push ${{ REPOSITORY }}
