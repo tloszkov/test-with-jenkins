@@ -3,9 +3,9 @@ name: Build and push test docker image
 on: [push]
 
 env:
-    DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-    DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-    REPOSITORY: ${{ github.repository }}
+    DOCKERHUB_USERNAME: $secrets.DOCKERHUB_USERNAME
+    DOCKERHUB_PASSWORD: $secrets.DOCKERHUB_PASSWORD
+    REPOSITORY: $github.repository
 
 jobs:
   push-image-to-dockerhub:
@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: docker login
-        run: docker login -u ${{ env.DOCKERHUB_USERNAME }} -p ${{ env.DOCKERHUB_PASSWORD }}
+        run: docker login -u $env.DOCKERHUB_USERNAME -p $env.DOCKERHUB_PASSWORD
       - name: docker build
-        run: docker build -t ${{ env.REPOSITORY }} .
+        run: docker build -t $env.REPOSITORY .
       - name: docker publish
-        run: docker push ${{ env.REPOSITORY }}
+        run: docker push $env.REPOSITORY
