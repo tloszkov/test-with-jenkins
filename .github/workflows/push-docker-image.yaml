@@ -6,6 +6,7 @@ env:
 #    DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 #    DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
     REPOSITORY: ${{ github.event.repository.name }}
+    DOCKER_IMAGE: 'kzsolt82691/jenkinsfirststeps:latest'
 
 jobs:
   push-image-to-dockerhub:
@@ -15,6 +16,6 @@ jobs:
       - name: docker login
         run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
       - name: docker build
-        run: docker build -t ${{env.REPOSITORY}} .
+        run: docker build -t ${{ DOCKER_IMAGE }} .
       - name: docker publish
-        run: docker push ${{ env.REPOSITORY }}
+        run: docker push ${{ DOCKER_IMAGE }}
