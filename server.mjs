@@ -15,7 +15,11 @@ app.get('/healthcheck', (req, res) => {
     res.status(200).send( 'Server is up!');
 });
 
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+
+
+export default app;
