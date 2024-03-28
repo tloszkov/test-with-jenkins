@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh 'echo "install-test"'
+                sh 'echo "install-test  "'
             }
         }
         stage('Test') {
